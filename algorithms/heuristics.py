@@ -43,7 +43,28 @@ def survivorHeuristic(state: Tuple[Tuple, Any], problem: MultiSurvivorProblem):
     - Balance heuristic strength vs. computation time (do experiments!)
     """
     # TODO: Add your code here
+    
+    ###################################### 
+    # primer intento, solo distancia al sobreviviente más cercano, no es muy fuerte 
+    # pero es admisible y consistente y fue lo que se me ocurrio primero
+    """position, survivors_grid = state
+    survivors = survivors_grid.asList()
 
+    if len(survivors) == 0:
+        return 0
+
+    distances = []
+    for s in survivors:
+        d = abs(position[0] - s[0]) + abs(position[1] - s[1])
+        distances.append(d)
+
+    return min(distances)"""
+    #######################################################
+    #prompt que utilice para mejorar la heuristica
+    """Estoy trabajando en el MultiSurvivorProblem y diseñé una heurística basada únicamente 
+    en la distancia Manhattan al sobreviviente más cercano. ¿Podrías revisarla para confirmar 
+    si es admisible y consistente? Además, ¿existe una forma de fortalecerla sin perder admisibilidad?"""
+    #######################################################
     position, survivors_grid = state
     survivors = survivors_grid.asList()
 
@@ -51,7 +72,7 @@ def survivorHeuristic(state: Tuple[Tuple, Any], problem: MultiSurvivorProblem):
     if len(survivors) == 0:
         return 0
 
-    # re basica Distancia al sobreviviente más cercano 
+    # la basica, Distancia al sobreviviente más cercano 
     manhattan_distances = []
     for s in survivors:
         d = abs(position[0] - s[0]) + abs(position[1] - s[1])
@@ -59,8 +80,7 @@ def survivorHeuristic(state: Tuple[Tuple, Any], problem: MultiSurvivorProblem):
 
     nearest_distance = min(manhattan_distances)
 
-    # --- MST entre sobrevivientes restantes ---
-    # Usamos algoritmo tipo Prim sencillo
+    # MST entre sobrevivientes restantes 
 
     mst_cost = 0
     visited = set()
