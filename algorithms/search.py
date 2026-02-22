@@ -2,6 +2,7 @@ from algorithms.problems import SearchProblem
 import algorithms.utils as utils
 from world.game import Directions
 from algorithms.heuristics import nullHeuristic
+from algorithms import utils
 
 
 def tinyHouseSearch(problem: SearchProblem):
@@ -81,7 +82,34 @@ def uniformCostSearch(problem: SearchProblem):
     """
     Search the node of least total cost first.
     """
+    
+    frontier = utils.PriorityQueue()
+    
 
+    start_state = problem.getStartState()
+    
+    frontier.push((start_state, [], 0), 0)
+    
+    visited = set()
+    
+    while not frontier.isEmpty():
+        
+        state, actions, cost = frontier.pop()
+        
+        if problem.isGoalState(state):
+            return actions
+        
+        if state not in visited:
+            visited.add(state)
+            
+            for successor, action, stepCost in problem.getSuccessors(state):
+                
+                new_cost = cost + stepCost
+                new_actions = actions + [action]
+                
+                frontier.push((successor, new_actions, new_cost), new_cost)
+    
+    return []
     # TODO: Add your code here
     utils.raiseNotDefined()
 
