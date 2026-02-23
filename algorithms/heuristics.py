@@ -15,16 +15,18 @@ def manhattanHeuristic(state, problem):
     """
     The Manhattan distance heuristic.
     """
-    # TODO: Add your code here
-    utils.raiseNotDefined()
+    xy = state
+    goal = problem.goal
+    return abs(xy[0] - goal[0]) + abs(xy[1] - goal[1])
 
 
 def euclideanHeuristic(state, problem):
     """
     The Euclidean distance heuristic.
     """
-    # TODO: Add your code here
-    utils.raiseNotDefined()
+    xy = state
+    goal = problem.goal
+    return ((xy[0] - goal[0])**2 + (xy[1] - goal[1])**2)**0.5
 
 
 def survivorHeuristic(state: Tuple[Tuple, Any], problem: MultiSurvivorProblem):
